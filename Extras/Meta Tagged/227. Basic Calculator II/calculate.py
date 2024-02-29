@@ -1,0 +1,76 @@
+# https://leetcode.com/problems/basic-calculator-ii/description/
+
+# https://www.youtube.com/watch?v=W3Rg4HVSZ9k&t=15s
+
+# Given a string s which represents an expression, evaluate this expression and return its value. 
+
+# The integer division should truncate toward zero.
+
+# You may assume that the given expression is always valid. All intermediate results will be in the range of [-231, 231 - 1].
+
+# Note: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().
+
+ 
+
+# Example 1:
+
+# Input: s = "3+2*2"
+# Output: 7
+
+# Example 2:
+
+# Input: s = " 3/2 "
+# Output: 1
+
+# Example 3:
+
+# Input: s = " 3+5 / 2 "
+# Output: 5
+
+ 
+
+# Constraints:
+
+#     1 <= s.length <= 3 * 105
+#     s consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.
+#     s represents a valid expression.
+#     All the integers in the expression are non-negative integers in the range [0, 231 - 1].
+#     The answer is guaranteed to fit in a 32-bit integer.
+
+class Solution:
+    def calculate(self, s: str) -> int:
+        currOp = "+"
+        curr = prev = res = 0
+        i = 0
+
+        while i < len(s):
+            currChar = s[i]
+
+            if currChar.isdigit():
+                while i < len(s) and s[i].isdigit():
+                    curr = curr * 10 + int(s[i])
+                    i += 1
+                i -= 1
+
+                if currOp == "+":
+                    res += curr
+                    prev = curr
+                elif currOp == "-":
+                    res -= curr
+                    prev = -curr
+                elif currOp == "*":
+                    res -= prev
+                    res += prev * curr
+                    prev = prev * curr
+                elif currOp == "/":
+                    res -= prev
+                    res += int(prev / curr)
+                    prev = int(prev / curr)
+                
+                curr = 0
+
+            elif currChar != " ":
+                currOp = currChar
+            
+            i += 1
+        return res
