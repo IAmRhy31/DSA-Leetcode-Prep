@@ -74,3 +74,5 @@ class Solution:
             
             i += 1
         return res
+    
+# For * and / : rp, rpc, ppc
