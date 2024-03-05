@@ -37,6 +37,8 @@
 import random
 from typing import List
 
+# Use concept of Reservoir Sampling 
+
 class Solution:
 
     def __init__(self, nums: List[int]):
