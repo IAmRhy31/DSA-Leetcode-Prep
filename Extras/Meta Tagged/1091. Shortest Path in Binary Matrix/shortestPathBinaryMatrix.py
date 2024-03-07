@@ -65,3 +65,34 @@ class Solution:
 
 # T - O(N)
 # S - O(N)
+    
+# Follow-up: If asked to print the path, rather than the length:
+    
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> List[List[int]]:
+        n = len(grid)
+
+        if grid[0][0] or grid[n - 1][n - 1]:
+            return []
+
+        queue = [(0, 0, [(0, 0)])]  # row, column, and path
+        grid[0][0] = 1
+
+        while queue:
+            r, c, path = queue.pop(0)
+
+            if r == n - 1 and c == n - 1:
+                return path
+
+            directions = [
+                (r - 1, c), (r - 1, c - 1), (r - 1, c + 1),
+                (r, c - 1), (r, c + 1),
+                (r + 1, c), (r + 1, c - 1), (r + 1, c + 1)
+            ]
+
+            for x, y in directions:
+                if 0 <= x < n and 0 <= y < n and grid[x][y] == 0:
+                    grid[x][y] = 1
+                    queue.append((x, y, path + [(x, y)]))
+
+        return []
