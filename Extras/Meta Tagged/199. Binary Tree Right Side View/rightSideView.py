@@ -48,7 +48,7 @@ class Solution:
             for i in range(levelLen):
                 node = queue.popleft()
 
-                if i == levelLen - 1:
+                if i == levelLen - 1: # 0 if asked left side view
                     res.append(node.val)
 
                 if node.left:

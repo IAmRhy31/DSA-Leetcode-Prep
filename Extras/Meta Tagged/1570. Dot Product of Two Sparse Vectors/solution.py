@@ -77,6 +77,6 @@ class SparseVector:
             else:
                 i += 1
         return resProduct
-
-
+    
+# T and S - O(N + M)
 # If Follow up is asked in an interview: the answer is use Binary Search

@@ -49,4 +49,7 @@ class Solution:
 
         dfs(root)
         return res[0]
+    
+    # T - O(N)
+    # S - O(H)
 
