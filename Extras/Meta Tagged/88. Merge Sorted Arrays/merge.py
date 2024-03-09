@@ -68,3 +68,78 @@ class Solution:
             last -= 1
             n -= 1
         
+# If asked to merge three sorted arrays:    
+def merge3sorted(A, B, C):
+	(l1, l2, l3) = (len(A), len(B), len(C))
+	i = j = k = 0
+
+	# Destination array
+	ans = []
+
+	while (i < l1 or j < l2 or k < l3):
+
+		# Assigning a, b, c with max values so that if
+		# any value is not present then also we can sort
+		# the array
+		a = 9999
+		b = 9999
+		c = 9999
+
+		# a, b, c variables are assigned only if the
+		# value exist in the array.
+		if (i < l1):
+			a = A[i]
+		if (j < l2):
+			b = B[j]
+		if (k < l3):
+			c = C[k]
+
+		# Checking if 'a' is the minimum
+		if (a <= b and a <= c):
+			ans.append(a)
+			i += 1
+
+		# Checking if 'b' is the minimum
+		elif (b <= a and b <= c):
+			ans.append(b)
+			j += 1
+
+		# Checking if 'c' is the minimum
+		elif (c <= a and c <= b):
+			ans.append(c)
+			k += 1
+
+	return ans
+
+     # T and S : O(M + N + O) = O(N)
+
+ # If asked to merge three sorted arrays but without duplicates:
+
+def merge_three_sorted_arrays_no_duplicates(arr1, arr2, arr3):
+    result = []  # Initialize the result array to store the merged and deduplicated values
+    i = j = k = 0  # Initialize pointers for each array
+
+    while i < len(arr1) or j < len(arr2) or k < len(arr3):
+        # Extract values at current pointers (or use infinity if pointers are out of bounds)
+        val1 = arr1[i] if i < len(arr1) else float('inf')
+        val2 = arr2[j] if j < len(arr2) else float('inf')
+        val3 = arr3[k] if k < len(arr3) else float('inf')
+
+        # Find the minimum value among the three arrays
+        min_val = min(val1, val2, val3)
+
+        # Move the pointers based on the minimum value
+        if min_val == val1:
+            i += 1
+        elif min_val == val2:
+            j += 1
+        else:
+            k += 1
+
+        # Append the distinct value to the result (avoid duplicates)
+        if not result or min_val != result[-1]:
+            result.append(min_val)
+
+    return result
+
+    # T and S : O(N)
