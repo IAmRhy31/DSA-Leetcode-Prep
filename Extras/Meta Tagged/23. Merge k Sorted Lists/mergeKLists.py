@@ -71,3 +71,42 @@ class Solution:
         
         # Time Complexity: O(N log k)
         # Space Complexity: O(k)
+    
+    # Follow-up: If asked merge k sorted arrays instead of linked lists:
+
+def merge_k_sorted_arrays(arrays):
+    # Min heap to store tuples (element, array index, index within array)
+    min_heap = []
+    
+    # Initialize the heap with the first element from each array
+    for i, array in enumerate(arrays):
+        if array:
+            heapq.heappush(min_heap, (array[0], i, 0))
+
+    result = []
+
+    while min_heap:
+        val, array_idx, idx_within_array = heapq.heappop(min_heap)
+        result.append(val)
+
+        # Move to the next element in the same array
+        if idx_within_array + 1 < len(arrays[array_idx]):
+            heapq.heappush(min_heap, (arrays[array_idx][idx_within_array + 1], array_idx, idx_within_array + 1))
+
+    return result
+
+    # Time Complexity: O(N log k)
+    # Space Complexity: O(k)
+
+# Example usage:
+arrays = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9]
+]
+
+result = merge_k_sorted_arrays(arrays)
+print(result)
+
+    
+    
