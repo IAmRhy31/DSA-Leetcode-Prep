@@ -53,3 +53,6 @@ class Solution:
                 result.append(num)
             if len(result) == k:
                 return result
+            
+        # Time Complexity: O(N + K log N)
+        # Space Complexity: O(N) for the countMap and freq arrays
